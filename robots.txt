@@ -1,0 +1,4 @@
+User-Agent: *
+Disallow:
+Sitemap: http://ecosail.ru/sitemap.xml
+Host: ecosail.ru

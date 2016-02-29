@@ -1,0 +1,424 @@
+<!DOCTYPE HTML>
+<html lang="ru-RU">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+
+		<script type="text/javascript">
+			(function(window) {
+				window.userSiteData = {};
+			}(this));
+		</script>
+
+		<script type="text/javascript" data-main="/_s/js/includer.js" src="_s/js/vendors/require.js"></script>
+	</head>
+
+	<body class="print-page">
+		<div class="print-container"></div>
+
+		<script type="text/template" id="order-print-template">
+			<%
+			var contact_details = contact_details || {};
+			var discount = parseInt(discount) || 0;
+			var site_logo_url = site_logo_url || '';
+			%>
+			<table width="100%" cellspacing="0" cellpadding="0">
+				<tr>
+					<td width="50%"></td>
+					<td>
+						<table width="600" cellspacing="0" cellpadding="0">
+							<tbody>
+
+								<!-- Main rows -->
+	<% if (site_logo_url) { %>
+								<tr bgcolor="silver">
+									<!-- Left padding -->
+									<td style="font-size:0;line-height:0;" width="20">
+										<img src="/_s/i/none.gif" alt="" border="0" hspace="0" vspace="0" width="20" height="1" />
+									</td>
+									<!-- Header -->
+									<td>
+										<table width="100%" cellspacing="0" cellpadding="0">
+											<tbody>
+												<tr>
+													<td style="font-size:0;line-height:0;">
+														<img src="/_s/i/none.gif" alt="" border="0" hspace="0" vspace="0" width="1" height="20" />
+													</td>
+												</tr>
+												<tr>
+													<td style="font-size:0;line-height:0;">
+														<!-- Logo -->
+														<img src="<%= site_logo_url %>" alt="" border="0" hspace="0" vspace="0" width="219" height=" " />
+													</td>
+												</tr>
+												<tr>
+													<td style="font-size:0;line-height:0;">
+														<img src="/_s/i/none.gif" alt="" border="0" hspace="0" vspace="0" width="1" height="20" />
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									</td>
+									<!-- Right padding -->
+									<td style="font-size:0;line-height:0;">
+										<img src="/_s/i/none.gif" alt="" border="0" hspace="0" vspace="0" width="20" height="1" />
+									</td>
+								</tr>
+	<% } %>
+
+								<!-- Padding top -->
+								<tr>
+									<td colspan="3" style="font-size:0;line-height:0;">
+										<img src="/_s/i/none.gif" alt="" border="0" hspace="0" vspace="0" width="1" height="20" />
+									</td>
+								</tr>
+
+								<!-- Main rows -->
+								<!-- begin_body -->
+
+								<!-- Main rows -->
+								<tr>
+									<!-- Left padding -->
+									<td style="font-size:0;line-height:0;" width="20">
+										<img src="/_s/i/none.gif" alt="" border="0" hspace="0" vspace="0" width="20" height="1" />
+									</td>
+									<!-- Header -->
+									<td>
+										<table width="100%" cellspacing="0" cellpadding="0">
+											<tbody>
+												<tr height="39" valign="middle">
+													<td width="220">
+														<font face="Tahoma, Verdana, Helvetica, sans-serif" size="3" color="#000000" style="font-size:14px;"><%= _('cart:mail:order_num') %>:</font>
+													</td>
+													<td>
+														<font face="Tahoma, Verdana, Helvetica, sans-serif" size="3" color="#000000" style="font-size:14px;">
+															<%= number %>
+														</font>
+													</td>
+												</tr>										
+	<% if (contact_details) { %>
+		<% for ( var key in contact_details ) { %>
+												<!-- Table border -->
+												<tr>
+													<td colspan="2" bgcolor="#eaf2e7" height="1" style="font-size:0;line-height:0;">
+														<img src="/_s/i/none.gif" alt="" border="0" hspace="0" vspace="0" width="1" height="1" />
+													</td>
+												</tr>
+												<tr height="39" valign="middle">
+													<td width="220">
+														<font face="Tahoma, Verdana, Helvetica, sans-serif" size="3" color="#000000" style="font-size:14px;">
+															<% if (key == 'name' || key == 'email' || key == 'phone') { %>
+																<%= _('shop:admin_panel:order_list:details:'+key) %>
+															<% } else { %>
+																<%= key %>
+															<% } %>
+														</font>
+													</td>
+													<td>
+														<font face="Tahoma, Verdana, Helvetica, sans-serif" size="3" color="#000000" style="font-size:14px;">
+															<% if (contact_details[key]) { %>
+																<%= contact_details[key] %>
+															<% } else { %>
+																<span class="unknown-field"><%= _('shop:admin_panel:order_list:details:unknown') %></span>
+															<% } %>
+														</font>
+													</td>
+												</tr>
+		<% } %>
+	<% } %>
+	<!-- Доставка -->
+	<% if (delivery) { %>
+												<!-- Table border -->
+												<tr>
+													<td colspan="2" bgcolor="#eaf2e7" height="1" style="font-size:0;line-height:0;">
+														<img src="/_s/i/none.gif" alt="" border="0" hspace="0" vspace="0" width="1" height="1" />
+													</td>
+												</tr>
+												<tr height="39" valign="middle">
+													<td width="220">
+														<font face="Tahoma, Verdana, Helvetica, sans-serif" size="3" color="#000000" style="font-size:14px;">
+															<%= _('core:delivery') %>:
+														</font>
+													</td>
+													<td>
+														<font face="Tahoma, Verdana, Helvetica, sans-serif" size="3" color="#000000" style="font-size:14px;">
+															<%= _('eshop:delivery:'+delivery.type) %>
+															<% if (delivery.period)  { %> <%= delivery.period + ' ' + _('eshop:delivery:days', delivery.period) %> <% } %><!--
+															--><% if (delivery.region) { %>, <%= delivery.region  %> <% } %><!--
+															--><% if (delivery.address) { %>, <%= delivery.address %> <% } %>
+														</font> 
+													</td>
+												</tr>
+	<% } %>
+	<!-- Адрес -->
+	<% if (address && (!delivery || delivery.type != 'pickup')) { %>
+												<!-- Table border -->
+												<tr>
+													<td colspan="2" bgcolor="#eaf2e7" height="1" style="font-size:0;line-height:0;">
+														<img src="/_s/i/none.gif" alt="" border="0" hspace="0" vspace="0" width="1" height="1" />
+													</td>
+												</tr>
+												<tr height="39" valign="middle">
+													<td width="220">
+														<font face="Tahoma, Verdana, Helvetica, sans-serif" size="3" color="#000000" style="font-size:14px;">
+															<%= _('cart:field:address') %>:
+														</font>
+													</td>
+													<td>
+														<font face="Tahoma, Verdana, Helvetica, sans-serif" size="3" color="#000000" style="font-size:14px;">
+															<% if (zip_code) { %><%= zip_code %>, <% } %>
+															<%= address %>
+														</font>
+													</td>
+												</tr>
+	<% } %>
+	<!-- Способ оплаты -->
+	<% if (payment_method && payment_method.id != 'default') { %>
+												<!-- Table border -->
+												<tr>
+													<td colspan="2" bgcolor="#eaf2e7" height="1" style="font-size:0;line-height:0;">
+														<img src="/_s/i/none.gif" alt="" border="0" hspace="0" vspace="0" width="1" height="1" />
+													</td>
+												</tr>
+												<tr valign="middle" height="39">
+													<td width="220">
+														<font face="Tahoma, Verdana, Helvetica, sans-serif" size="3" color="#000000" style="font-size:14px;">
+															<%= _('cart:payment:payment_method') %>:
+														</font>
+													</td>
+													<td>
+														<font face="Tahoma, Verdana, Helvetica, sans-serif" size="3" color="#000000" style="font-size:14px;">
+															<%=  (payment_method.id != 'offline' ? payment_method.id : payment_method.title)  %>
+														</font>
+													</td>
+												</tr>
+												<!-- Table border -->
+												<tr>
+													<td colspan="2" bgcolor="#eaf2e7" height="1" style="font-size:0;line-height:0;">
+														<img src="/_s/i/none.gif" alt="" border="0" hspace="0" vspace="0" width="1" height="1" />
+													</td>
+												</tr>
+	<% } %>
+												<!-- Table border -->
+												<tr>
+													<td colspan="2" bgcolor="#eaf2e7" height="1" style="font-size:0;line-height:0;">
+														<img src="/_s/i/none.gif" alt="" border="0" hspace="0" vspace="0" width="1" height="1" />
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									</td>
+									<!-- Right padding -->
+									<td style="font-size:0;line-height:0;">
+										<img src="/_s/i/none.gif" alt="" border="0" hspace="0" vspace="0" width="20" height="1" />
+									</td>
+								</tr>
+
+								<!-- Padding top -->
+								<tr>
+									<td colspan="3" style="font-size:0;line-height:0;">
+										<img src="/_s/i/none.gif" alt="" border="0" hspace="0" vspace="0" width="1" height="45" />
+									</td>
+								</tr>						<!-- Main rows -->
+								<tr>
+									<!-- Left padding -->
+									<td style="font-size:0;line-height:0;" width="20">
+										<img src="/_s/i/none.gif" alt="" border="0" hspace="0" vspace="0" width="20" height="1" />
+									</td>
+									<td>
+										<font face="Tahoma, Verdana, Helvetica, sans-serif" size="4" color="#000000" style="font-size:16px;"><b><%= _('cart:mail:head') %>:</b></font>
+									</td>
+									<!-- Right padding -->
+									<td style="font-size:0;line-height:0;">
+										<img src="/_s/i/none.gif" alt="" border="0" hspace="0" vspace="0" width="20" height="1" />
+									</td>
+								</tr>
+
+								<!-- Padding top -->
+								<tr>
+									<td colspan="3" style="font-size:0;line-height:0;">
+										<img src="/_s/i/none.gif" alt="" border="0" hspace="0" vspace="0" width="1" height="20" />
+									</td>
+								</tr>
+								<!-- Main rows -->
+								<tr>
+									<!-- Left padding -->
+									<td style="font-size:0;line-height:0;" width="20">
+										<img src="/_s/i/none.gif" alt="" border="0" hspace="0" vspace="0" width="20" height="1" />
+									</td>
+									<td>
+										<table width="100%" cellspacing="0" cellpadding="0">
+											<thead>
+												<tr height="38">
+													<td align="left">
+														<font face="Tahoma, Verdana, Helvetica, sans-serif" size="3" color="#000000" style="font-size:14px;"><%= _('cart:title') %></font>
+													</td>
+													<td align="left">
+														<font face="Tahoma, Verdana, Helvetica, sans-serif" size="3" color="#000000" style="font-size:14px;"><%= _('cart:amount') %></font>
+													</td>
+													<td align="right">
+														<font face="Tahoma, Verdana, Helvetica, sans-serif" size="3" color="#000000" style="font-size:14px;"><%= _('cart:price') %></font>
+													</td>
+												</tr>
+											</thead>
+											<tbody>
+		<% for ( var i = 0; i < items.length; i++ ) { %>
+												<!-- Table border -->
+												<tr width="100%">
+													<td colspan="3" bgcolor="#eaf2e7" height="1" style="font-size:0;line-height:0;">
+														<img src="/_s/i/none.gif" alt="" border="0" hspace="0" vspace="0" width="100%" height="1" />
+													</td>
+												</tr>
+												<tr height="38">
+													<td align="left" width="220">
+														<font face="Tahoma, Verdana, Helvetica, sans-serif" size="3" color="#000000" style="font-size:14px;">
+															<% if (items[i].url) { %>
+																<a href="<%= items[i].url %>" color="#3e82ff">
+															<% } %>
+																<%= items[i].title %>
+															<% if (items[i].url) { %>
+																</a>
+															<% } %>
+														</font>
+														<% if (items[i].attrs) { %>
+															<font face="Tahoma, Verdana, Helvetica, sans-serif" size="3" color="#000000" style="font-size:12px;">
+																(<%= items[i].attrs %>)
+															</font>
+														<% } %>
+													</td>
+													<td align="left">
+														<font face="Tahoma, Verdana, Helvetica, sans-serif" size="3" color="#000000" style="font-size:14px;">
+															<%= items[i].amount %>
+														</font>
+													</td>
+													<td align="right">
+														<font face="Tahoma, Verdana, Helvetica, sans-serif" size="3" color="#000000" style="font-size:14px;">
+															<%= items[i].price %> <%= currency %>
+														</font>
+													</td>
+												</tr>
+		<% } %>
+												<!-- Сумма -->
+												<!-- Table border -->
+												<tr width="100%">
+													<td colspan="3" bgcolor="#eaf2e7" height="1" style="font-size:0;line-height:0;">
+														<img src="/_s/i/none.gif" alt="" border="0" hspace="0" vspace="0" width="100%" height="1" />
+													</td>
+												</tr>
+												<tr height="38">
+													<td align="left" width="220">
+														<font face="Tahoma, Verdana, Helvetica, sans-serif" size="3" color="#000" style="font-size:14px;"><b>
+															<%= _('shop:admin_panel:order_list:details:order_total_cost') %>
+														</b></font>
+													</td>
+													<td align="left">
+														
+													</td>
+													<td align="right">
+														<font face="Tahoma, Verdana, Helvetica, sans-serif" size="3" color="#000" style="font-size:14px;"><b>
+															<%= price %> <%= currency %></b>
+														</font>
+													</td>
+												</tr>
+												<!-- Итого -->
+												<!-- Table border -->
+												<tr width="100%">
+													<td colspan="3" bgcolor="#eaf2e7" height="1" style="font-size:0;line-height:0;">
+														<img src="/_s/i/none.gif" alt="" border="0" hspace="0" vspace="0" width="100%" height="1" />
+													</td>
+												</tr>
+												<tr height="38">
+													<td align="left" width="220">
+														<font face="Tahoma, Verdana, Helvetica, sans-serif" size="3" color="#000" style="font-size:14px;"><b>
+															<%= _('cart:total') %>:
+														</b></font>
+													</td>
+													<td align="left">
+														
+													</td>
+													<td align="right">
+														<font face="Tahoma, Verdana, Helvetica, sans-serif" size="3" color="#000" style="font-size:14px;"><b>
+															<%= total %> <%= currency %>
+														</b></font>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									</td>
+									<!-- Right padding -->
+									<td style="font-size:0;line-height:0;">
+										<img src="/_s/i/none.gif" alt="" border="0" hspace="0" vspace="0" width="20" height="1" />
+									</td>
+								</tr>
+
+
+		
+
+		<!-- Комментарий к заказу -->
+		<% if (comment) { %>
+								<!-- Padding top -->
+								<tr>
+									<td colspan="3" style="font-size:0;line-height:0;">
+										<img src="/_s/i/none.gif" alt="" border="0" hspace="0" vspace="0" width="1" height="45" />
+									</td>
+								</tr>						<!-- Main rows -->
+								<tr>
+									<!-- Left padding -->
+									<td style="font-size:0;line-height:0;" width="20">
+										<img src="/_s/i/none.gif" alt="" border="0" hspace="0" vspace="0" width="20" height="1" />
+									</td>
+									<td>
+										<font face="Tahoma, Verdana, Helvetica, sans-serif" size="4" color="#000000" style="font-size:16px;"><b>
+											<%= _('cart:mail:comment') %>:
+										</b></font>
+									</td>
+									<!-- Right padding -->
+									<td style="font-size:0;line-height:0;">
+										<img src="/_s/i/none.gif" alt="" border="0" hspace="0" vspace="0" width="20" height="1" />
+									</td>
+								</tr>
+								<!-- Padding top -->
+								<tr>
+									<td colspan="3" style="font-size:0;line-height:0;">
+										<img src="/_s/i/none.gif" alt="" border="0" hspace="0" vspace="0" width="1" height="13" />
+									</td>
+								</tr>
+								<tr>
+									<!-- Left padding -->
+									<td style="font-size:0;line-height:0;" width="20">
+										<img src="/_s/i/none.gif" alt="" border="0" hspace="0" vspace="0" width="20" height="1" />
+									</td>
+									<td>
+										<img src="/_s/i/none.gif" alt="" border="0" hspace="0" vspace="0" width="1" height="1" />
+										<br />
+										<font face="Tahoma, Verdana, Helvetica, sans-serif" size="3" color="#000000" style="font-size:14px;">
+											<%= comment %>
+										</font>
+										<br />
+										<img src="/_s/i/none.gif" alt="" border="0" hspace="0" vspace="0" width="1" height="1" /> 
+									</td>
+									<!-- Right padding -->
+									<td style="font-size:0;line-height:0;">
+										<img src="/_s/i/none.gif" alt="" border="0" hspace="0" vspace="0" width="20" height="1" />
+									</td>
+								</tr>
+		<% } %>
+
+
+
+								<!-- Padding top -->
+								<tr>
+									<td colspan="3" style="font-size:0;line-height:0;">
+										<img src="/_s/i/none.gif" alt="" border="0" hspace="0" vspace="0" width="1" height="20" />
+									</td>
+								</tr>
+
+							</tbody>
+						</table>
+					</td>
+					<td width="50%"></td>
+				</tr>
+			</table>
+		</script>
+	</body>
+</html>
